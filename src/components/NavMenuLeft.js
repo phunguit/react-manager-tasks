@@ -17,6 +17,11 @@ var routesMenu = [
         to: '/signup',
         exact: true,
         name: 'SignUp'
+    },
+    {
+        to: '/user',
+        exact: true,
+        name: 'User'
     }
 ];
 

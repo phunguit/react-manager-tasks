@@ -3,6 +3,7 @@ import React from 'react';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
 import TasksPage from './pages/TasksPage';
+import UserPage from './pages/UserPage';
 
 const routers = [
     {
@@ -19,6 +20,11 @@ const routers = [
         path: '/tasks',
         exact: true,
         main: () => <TasksPage />
+    },
+    {
+        path: '/user',
+        exact: true,
+        main: () => <UserPage />
     }
 ]
 
