@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import TaskDoing from './TaskDoing';
+import TaskForm from './TaskForm';
+
 class Tasks extends Component {
 
     render() {
@@ -12,27 +15,13 @@ class Tasks extends Component {
                             <h3 className="panel-title">Task Doing</h3>
                             </div>
                             <div className="panel-body">
-                            <ul className="list-group">
-                                <li className="list-group-item">
-                                    <p className="task">Login fail with email</p>
-                                    <span className="author"><span className="glyphicon glyphicon-user" aria-hidden="true" />&nbsp;admin@gmail.com</span>
-                                    <button type="button" className="btn btn-warning btn-xs">Completed</button>
-                                </li>
-                                <li className="list-group-item">
-                                    <p className="task">Error register</p>
-                                    <span className="author"><span className="glyphicon glyphicon-user" aria-hidden="true" />&nbsp;admin@gmail.com</span>
-                                    <button type="button" className="btn btn-warning btn-xs">Completed</button>
-                                </li>
-                            </ul>
+                                <ul className="list-group">
+                                    <TaskDoing />
+                                    <TaskDoing />
+                                    <TaskDoing />
+                                </ul>
                             </div>
-                            <div className="panel-footer text-right">
-                            <form className="form-inline">
-                                <div className="form-group">
-                                    <input type="text" name="task" className="form-control" placeholder="Task" />
-                                </div>
-                                <button type="submit" className="btn btn-info">Add</button>
-                            </form>
-                            </div>
+                            <TaskForm />
                         </div>
                     </div>
                     <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
