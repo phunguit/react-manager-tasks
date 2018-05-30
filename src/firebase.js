@@ -10,9 +10,25 @@ const config = {
 };
 const firebaseApp = firebase.initializeApp(config);
 
-firebase.database().ref('tasks/' + 'asdasdasasd').set({
+/*firebase.database().ref('tasks/' + 'asdasdasasd').set({
     id: '23',
     name: 'This is phung'
-});
+});*/
+
+firebaseApp.getTasks = () => {
+    var records = [];
+    //var ref = firebase.database().ref('tasks').orderByChild('status').equalTo(0);
+    
+    var ref = firebase.database().ref('tasks');
+    ref.once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            var childData = childSnapshot.val();
+            
+            records.push(childData);
+        });
+    });
+    console.log(records.length);
+    return records;
+}
 
 export default firebaseApp;

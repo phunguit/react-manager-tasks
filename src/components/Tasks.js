@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 import TaskDoing from './TaskDoing';
 import TaskForm from './TaskForm';
+import firebaseApp from '../firebase';
 
 class Tasks extends Component {
 
     render() {
+        var tasks = firebaseApp.getTasks();
         return (
             <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div className="row">
@@ -16,9 +18,7 @@ class Tasks extends Component {
                             </div>
                             <div className="panel-body">
                                 <ul className="list-group">
-                                    <TaskDoing />
-                                    <TaskDoing />
-                                    <TaskDoing />
+                                    { this.getTasks(tasks) }
                                 </ul>
                             </div>
                             <TaskForm />
@@ -46,6 +46,17 @@ class Tasks extends Component {
                 </div>
             </div>
         );
+    }
+
+    getTasks(tasks) {
+        //debugger
+        console.log(tasks);
+        for (var i = 0; i < tasks.length; i ++) {
+            console.log(tasks[i]);
+        }
+        /*tasks.map( (task, index) => {
+            console.log(task);
+        })*/
     }
 
 }
