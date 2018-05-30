@@ -2,12 +2,33 @@ import React, { Component } from 'react';
 
 import TaskDoing from './TaskDoing';
 import TaskForm from './TaskForm';
-import firebaseApp from '../firebase';
+import { tasksRef } from '../firebase';
 
 class Tasks extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            items: []
+        }
+    }
+
+    componentWillMount() {
+        tasksRef.on('value', items => {
+            var records = [];
+            items.forEach((item) => {
+                records.push(item.val());
+            });
+
+            this.setState({
+                items: records
+            });
+        });
+    }
+
     render() {
-        var tasks = firebaseApp.getTasks();
+
         return (
             <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div className="row">
@@ -16,11 +37,7 @@ class Tasks extends Component {
                             <div className="panel-heading">
                             <h3 className="panel-title">Task Doing</h3>
                             </div>
-                            <div className="panel-body">
-                                <ul className="list-group">
-                                    { this.getTasks(tasks) }
-                                </ul>
-                            </div>
+                            <div className="panel-body">{ this.getTasks(this.state.items) }</div>
                             <TaskForm />
                         </div>
                     </div>
@@ -49,14 +66,15 @@ class Tasks extends Component {
     }
 
     getTasks(tasks) {
-        //debugger
-        console.log(tasks);
-        for (var i = 0; i < tasks.length; i ++) {
-            console.log(tasks[i]);
+        var xhtml = null;
+
+        if(tasks.length > 0) {
+            xhtml = tasks.map((task, index) => {
+                return <TaskDoing key={ index } task={ task } />
+            });
         }
-        /*tasks.map( (task, index) => {
-            console.log(task);
-        })*/
+
+        return <ul className="list-group">{ xhtml }</ul>;
     }
 
 }
