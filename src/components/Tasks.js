@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import TaskDoing from './TaskDoing';
-import TaskForm from './TaskForm';
+import TaskDoing    from './TaskDoing';
+import TaskForm     from './TaskForm';
+import TaskFinish   from './TaskFinish';
 import { tasksRef } from '../firebase';
 
 class Tasks extends Component {
@@ -10,25 +11,44 @@ class Tasks extends Component {
         super(props);
 
         this.state = {
-            items: []
+            tasksDoing: [],
+            tasksFishnish: []
         }
     }
 
     componentWillMount() {
         tasksRef.on('value', items => {
-            var records = [];
+            var recordsDoing    = [];
+            var recordsFinish   = [];
             items.forEach((item) => {
-                records.push(item.val());
+                var data = {
+                    key: '',
+                    name: '',
+                    email: '',
+                    status: 0
+                };
+
+                data.key    = item.key;
+                data.name   = item.val().name;
+                data.status = item.val().status;
+                data.email  = item.val().email;
+
+                if(item.val().status) {
+                    recordsFinish.push(data);
+                } else {
+                    recordsDoing.push(data);
+                }
             });
 
             this.setState({
-                items: records
+                tasksDoing: recordsDoing,
+                tasksFishnish: recordsFinish
             });
         });
     }
 
     render() {
-
+        
         return (
             <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div className="row">
@@ -37,7 +57,7 @@ class Tasks extends Component {
                             <div className="panel-heading">
                             <h3 className="panel-title">Task Doing</h3>
                             </div>
-                            <div className="panel-body">{ this.getTasks(this.state.items) }</div>
+                            <div className="panel-body">{ this.getTasksDoing(this.state.tasksDoing) }</div>
                             <TaskForm />
                         </div>
                     </div>
@@ -46,18 +66,7 @@ class Tasks extends Component {
                             <div className="panel-heading">
                             <h3 className="panel-title">Task Finish</h3>
                             </div>
-                            <div className="panel-body">
-                            <ul className="list-group">
-                                <li className="list-group-item">
-                                    <p className="task">CSS is too bad</p>
-                                    <span className="author"><span className="glyphicon glyphicon-user" aria-hidden="true" />&nbsp;admin@gmail.com</span>
-                                </li>
-                                <li className="list-group-item">
-                                    <p className="task">CSS error</p>
-                                    <span className="author"><span className="glyphicon glyphicon-user" aria-hidden="true" />&nbsp;lthlan54@gmail.com</span>
-                                </li>
-                            </ul>
-                            </div>
+                            <div className="panel-body">{ this.getTasksFinish(this.state.tasksFishnish) }</div>
                         </div>
                     </div>
                 </div>
@@ -65,15 +74,23 @@ class Tasks extends Component {
         );
     }
 
-    getTasks(tasks) {
+    getTasksDoing(tasks) {
         var xhtml = null;
-
         if(tasks.length > 0) {
             xhtml = tasks.map((task, index) => {
                 return <TaskDoing key={ index } task={ task } />
             });
         }
+        return <ul className="list-group">{ xhtml }</ul>;
+    }
 
+    getTasksFinish(tasks) {
+        var xhtml = null;
+        if(tasks.length > 0) {
+            xhtml = tasks.map((task, index) => {
+                return <TaskFinish key={ index } task={ task } />
+            });
+        }
         return <ul className="list-group">{ xhtml }</ul>;
     }
 

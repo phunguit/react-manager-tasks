@@ -13,4 +13,5 @@ const firebaseApp = firebase.initializeApp(config);
 //var ref = firebase.database().ref('tasks').orderByChild('status').equalTo(0);
 
 export const tasksRef = firebase.database().ref('tasks');
+export const tasksRefUpdate = firebase.database().ref();
 export default firebaseApp;
