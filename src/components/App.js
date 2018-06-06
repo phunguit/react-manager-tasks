@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import routers      from '../routers-config';
 import NavMenuLeft  from './NavMenuLeft';
+import Notify       from './Notify';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           </div>
           <div className="row">
             <NavMenuLeft />
+            <Notify />
             { this.getContentPage(routers) }
           </div>
         </div>
