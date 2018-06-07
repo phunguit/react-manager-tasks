@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { tasksRefUpdate } from '../firebase';
-
 class TaskFinish extends Component {
 
     render() {

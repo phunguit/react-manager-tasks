@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import notify from './notify';
 
 const reducers = combineReducers({
-    query: 'aaaa'
+    notify
 });
 
 export default reducers;

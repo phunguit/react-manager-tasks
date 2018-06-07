@@ -26,7 +26,7 @@ class Notify extends Component {
         }
 
         return (
-            <Alert type='info' onDismiss={this.handleDismiss}>
+            <Alert type='info' onDismiss={this.handleDismiss} position='top-right'>
                 This is Alert
             </Alert>
         );

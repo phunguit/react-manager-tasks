@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-
-import { tasksRef } from '../firebase';
-import { v4 as uuid } from 'uuid';
+import { tasksRef }         from '../firebase';
+import { v4 as uuid }       from 'uuid';
 
 class TaskForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: ''
+            name: '',
+            isShow: false
         };
     }
 
@@ -37,7 +37,7 @@ class TaskForm extends Component {
         var { name } = this.state;
         
         return (
-            <div className="panel-footer text-right">
+            <div className="panel-footer text-right">            
                 <form className="form-inline" onSubmit={this.handleOnSubmit}>
                     <div className="form-group">
                         <input type="text" value={ name } onChange={this.handleChange} name="name" className="form-control" placeholder="Task" />

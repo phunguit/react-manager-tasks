@@ -13,9 +13,9 @@ class App extends Component {
           <div className="page-header">
             <h1>Project 05 - Bug Reporting <small>React Redux Router Firebase</small></h1>
           </div>
+          <Notify />
           <div className="row">
             <NavMenuLeft />
-            <Notify />
             { this.getContentPage(routers) }
           </div>
         </div>
