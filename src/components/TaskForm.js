@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+
 import { tasksRef }         from '../firebase';
 import { v4 as uuid }       from 'uuid';
+import { AcAddTask }        from '../actions/index';
 
 class TaskForm extends Component {
 
@@ -24,6 +27,7 @@ class TaskForm extends Component {
         this.setState({
             name: ''
         });
+        this.props.handleAddTask();
     }
 
     handleChange = e => {        
@@ -50,4 +54,12 @@ class TaskForm extends Component {
 
 }
 
-export default TaskForm;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleAddTask: () => {
+            dispatch(AcAddTask())
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskForm);

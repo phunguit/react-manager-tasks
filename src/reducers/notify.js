@@ -7,11 +7,11 @@ var defaultState = {
 
 const notify = (state = defaultState, action) => {
     switch(action.type) {
-        case Types.CHANGE_NOTIFY_ADD:
+        case Types.CHANGE_NOTIFY_ADD:            
             state = {
                 type: Types.CHANGE_NOTIFY_ADD,
                 isShow: true
-            }            
+            }
             return state;
         default:
             return state;
