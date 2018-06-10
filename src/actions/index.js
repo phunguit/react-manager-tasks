@@ -5,3 +5,9 @@ export const AcAddTask = val => {
         type: Types.CHANGE_NOTIFY_ADD
     }
 }
+
+export const AcDismiss = val => {
+    return {
+        type: Types.HANDLE_DISMISS
+    }
+}

@@ -1,2 +1,3 @@
 export const CHANGE_NOTIFY_ADD  = 'CHANGE_NOTIFY_ADD';
 export const CHANGE_COMPLETED   = 'CHANGE_COMPLETED';
+export const HANDLE_DISMISS     = 'HANDLE_DISMISS';

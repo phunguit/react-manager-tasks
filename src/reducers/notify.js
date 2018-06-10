@@ -12,7 +12,11 @@ const notify = (state = defaultState, action) => {
                 type: Types.CHANGE_NOTIFY_ADD,
                 isShow: true
             }
-            return state;
+            return {...state};
+        
+        case Types.HANDLE_DISMISS:
+            state.isShow = false;
+            return {...state};
         default:
             return state;
     }

@@ -3,7 +3,7 @@ import { AlertContainer, Alert }    from 'react-bs-notifier';
 import { connect }                  from 'react-redux';
 
 import * as Types                   from '../contants/Action-Types';
-import { stat } from 'fs';
+import { AcDismiss }                from '../actions/index';
 
 const alerts = [{
 	id: Types.CHANGE_NOTIFY_ADD,
@@ -27,14 +27,10 @@ class Notify extends Component {
     }
 
     handleDismiss = e => {
-        this.setState({
-            isShow: false
-        });
+        this.props.closeDialog();
     }
 
     render() {
-
-        //var { isShow } = this.state;
         var { notify } = this.props;
 
         var isShow = (notify != null && notify.type != null) ? notify.isShow : false;
@@ -50,7 +46,7 @@ class Notify extends Component {
         });
         
         return (
-            <Alert type='info' onDismiss={this.handleDismiss} position='top-right'>{ dataFiltered[0].message }</Alert>
+            <Alert type='info' timeout={3000} onDismiss={this.handleDismiss} position='top-right'>{ dataFiltered[0].message }</Alert>
         );
     }
 
@@ -62,4 +58,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Notify);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeDialog: () => {
+            dispatch(AcDismiss())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notify);
