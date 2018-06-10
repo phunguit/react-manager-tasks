@@ -51,7 +51,6 @@ class TaskForm extends Component {
             </div>
         );
     }
-
 }
 
 const mapDispatchToProps = (dispatch) => {

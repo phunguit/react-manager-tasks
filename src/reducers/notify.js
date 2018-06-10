@@ -17,6 +17,14 @@ const notify = (state = defaultState, action) => {
         case Types.HANDLE_DISMISS:
             state.isShow = false;
             return {...state};
+
+        case Types.CHANGE_COMPLETED:
+            state = {
+                type: Types.CHANGE_COMPLETED,
+                isShow: true
+            }
+            return {...state};
+
         default:
             return state;
     }

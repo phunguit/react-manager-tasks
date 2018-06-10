@@ -11,3 +11,9 @@ export const AcDismiss = val => {
         type: Types.HANDLE_DISMISS
     }
 }
+
+export const AcCompletedTask = val => {
+    return {
+        type: Types.CHANGE_COMPLETED
+    }
+}

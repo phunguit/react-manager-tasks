@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect }          from 'react-redux';
 
-import { tasksRefUpdate } from '../firebase';
+import { tasksRefUpdate }   from '../firebase';
+import { AcCompletedTask }  from '../actions/index';
 
 class TaskDoing extends Component {
 
@@ -8,6 +10,7 @@ class TaskDoing extends Component {
         e.preventDefault();
         var { task } = this.props;
         tasksRefUpdate.child('/tasks/' + task.key).update({status: 1});
+        this.props.handleCompletedTask();
     }
 
     render() {
@@ -23,4 +26,12 @@ class TaskDoing extends Component {
 
 }
 
-export default TaskDoing;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleCompletedTask: () => {
+            dispatch(AcCompletedTask())
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskDoing);
