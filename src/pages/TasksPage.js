@@ -6,7 +6,7 @@ class TasksPage extends Component {
 
     render() {
         return (
-            <div className='signup'>
+            <div>
                 <Tasks />
             </div>
         );

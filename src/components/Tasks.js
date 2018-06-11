@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TaskDoing    from './TaskDoing';
 import TaskForm     from './TaskForm';
 import TaskFinish   from './TaskFinish';
-import { tasksRef } from '../firebase';
+import { tasksRef, tasksRefUpdate } from '../firebase';
 
 class Tasks extends Component {
 
@@ -47,8 +47,21 @@ class Tasks extends Component {
         });
     }
 
+    handleClearAll = () => {
+        var updates = {};
+
+        this.state.tasksFishnish.forEach(element => {
+            updates[element.key] = null;
+        });
+
+        tasksRef.update(updates);
+    }
+
     render() {
-        
+        var xhtmlBtnClearAll = null;
+        if(this.state.tasksFishnish.length > 0) {
+            xhtmlBtnClearAll = <button onClick={() => this.handleClearAll()} className='btn btn-danger'>Clear All</button>
+        }
         return (
             <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div className="row">
@@ -67,8 +80,10 @@ class Tasks extends Component {
                             <h3 className="panel-title">Task Finish</h3>
                             </div>
                             <div className="panel-body">{ this.getTasksFinish(this.state.tasksFishnish) }</div>
+                            { xhtmlBtnClearAll }
                         </div>
-                    </div>
+                        
+                    </div>                    
                 </div>
             </div>
         );
